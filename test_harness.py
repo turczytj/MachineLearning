@@ -1,4 +1,3 @@
-import configuration_mgr as cm
 import logging_mgr as logger
 import child1_class as child1
 import child2_class as child2
@@ -8,7 +7,10 @@ import unittest
 
 class ConfigurationTestCase(unittest.TestCase):
     def setUp(self):
-        self.config_mgr  = cm.ConfigurationMgr()
+        from importlib import import_module
+        config_module = import_module('Configuration.configuration_mgr')
+
+        self.config_mgr  = config_module.ConfigurationMgr()
         self.logging_mgr = logger.LoggingMgr(self.config_mgr.get_log_file_path())
 
     def tearDown(self):
@@ -96,13 +98,13 @@ if __name__ == '__main__': #unittest.main()
     testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
 
     # LoggingTestCase unit tests
-    testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
-    testsToRun.addTest(LoggingTestCase('test_valid_write'))
-    testsToRun.addTest(LoggingTestCase('test_invalid_write'))
+    #testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
+    #testsToRun.addTest(LoggingTestCase('test_valid_write'))
+    #testsToRun.addTest(LoggingTestCase('test_invalid_write'))
 
     # FeatureTestCase unit tests
-    testsToRun.addTest(InheritanceTestCase('test_inheritance'))
-    testsToRun.addTest(InheritanceTestCase('test_child1'))
-    testsToRun.addTest(InheritanceTestCase('test_child2'))
+    #testsToRun.addTest(InheritanceTestCase('test_inheritance'))
+    #testsToRun.addTest(InheritanceTestCase('test_child1'))
+    #testsToRun.addTest(InheritanceTestCase('test_child2'))
 
     unittest.TextTestRunner().run(testsToRun)
