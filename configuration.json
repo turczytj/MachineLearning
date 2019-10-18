@@ -1,0 +1,12 @@
+{
+  "Environment": {
+    "Runtime": "dev",
+    "OutputDirectory": "c:/temp"
+  },
+
+  "Logging": {
+    "LogFileDirectory": "c:/temp/",
+    "LogFileName": "my_log_file.log",
+    "LogLevel": "INFO"
+  }
+}
