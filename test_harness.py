@@ -1,19 +1,27 @@
-import logging_mgr as logger
 import child1_class as child1
 import child2_class as child2
 
 import os
+import sys
 import unittest
 
 class ConfigurationTestCase(unittest.TestCase):
     def setUp(self):
         from importlib import import_module
-        config_module = import_module('Configuration.configuration_mgr')
 
+        self.config_module_name = 'Configuration.configuration_mgr'
+        config_module = import_module(self.config_module_name)
         self.config_mgr  = config_module.ConfigurationMgr()
-        self.logging_mgr = logger.LoggingMgr(self.config_mgr.get_log_file_path())
+
+        self.logging_module_name = 'Logging.logging_mgr'
+        logging_module = import_module(self.logging_module_name)
+        self.logging_mgr = logging_module.LoggingMgr(self.config_mgr.get_log_file_path())
 
     def tearDown(self):
+        # Delete the Configuration and Logging modules loaded in SetUp()
+        del sys.modules[self.config_module_name]
+        del sys.modules[self.logging_module_name]
+
         # Invoke dispose() here so it releases the file lock on the log file
         self.logging_mgr.dispose()
 
@@ -30,10 +38,21 @@ class ConfigurationTestCase(unittest.TestCase):
 
 class LoggingTestCase(unittest.TestCase):
     def setUp(self):
-        self.config_mgr  = cm.ConfigurationMgr()
-        self.logging_mgr = logger.LoggingMgr(self.config_mgr.get_log_file_path())
+        from importlib import import_module
+
+        self.config_module_name = 'Configuration.configuration_mgr'
+        config_module = import_module(self.config_module_name)
+        self.config_mgr  = config_module.ConfigurationMgr()
+
+        self.logging_module_name = 'Logging.logging_mgr'
+        logging_module = import_module(self.logging_module_name)
+        self.logging_mgr = logging_module.LoggingMgr(self.config_mgr.get_log_file_path())
 
     def tearDown(self):
+        # Delete the Configuration and Logging modules loaded in SetUp()
+        del sys.modules[self.config_module_name]
+        del sys.modules[self.logging_module_name]
+
         # Invoke dispose() here so it releases the file lock on the log file
         self.logging_mgr.dispose()
 
@@ -98,9 +117,9 @@ if __name__ == '__main__': #unittest.main()
     testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
 
     # LoggingTestCase unit tests
-    #testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
-    #testsToRun.addTest(LoggingTestCase('test_valid_write'))
-    #testsToRun.addTest(LoggingTestCase('test_invalid_write'))
+    testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
+    testsToRun.addTest(LoggingTestCase('test_valid_write'))
+    testsToRun.addTest(LoggingTestCase('test_invalid_write'))
 
     # FeatureTestCase unit tests
     #testsToRun.addTest(InheritanceTestCase('test_inheritance'))
