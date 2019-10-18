@@ -25,16 +25,19 @@
   <ItemGroup>
     <Compile Include="child1_class.py" />
     <Compile Include="child2_class.py" />
-    <Compile Include="configuration_mgr.py" />
+    <Compile Include="Configuration\configuration_mgr.py" />
     <Compile Include="logging_mgr.py" />
     <Compile Include="parent_class.py" />
     <Compile Include="test_harness.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="configuration.json" />
+    <Content Include="Configuration\configuration.json" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
