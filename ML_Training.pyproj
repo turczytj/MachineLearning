@@ -26,7 +26,7 @@
     <Compile Include="child1_class.py" />
     <Compile Include="child2_class.py" />
     <Compile Include="Configuration\configuration_mgr.py" />
-    <Compile Include="logging_mgr.py" />
+    <Compile Include="Logging\logging_mgr.py" />
     <Compile Include="parent_class.py" />
     <Compile Include="test_harness.py" />
   </ItemGroup>
@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />
+    <Folder Include="Logging\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
