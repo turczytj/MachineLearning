@@ -1,8 +1,6 @@
-from parent_class import parent_class
+from Inheritance.parent import Parent
 
-class child1_class(parent_class):
-    """description of class"""
-
+class Child1(Parent):
     def __init__(self, name):
         super().__init__(name)
 

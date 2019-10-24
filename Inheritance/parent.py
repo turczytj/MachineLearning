@@ -1,8 +1,6 @@
-from abc import ABC, abstractmethod # Abstract Base Class
+from abc import ABC, abstractmethod
 
-class parent_class(ABC):
-    """description of class"""
-
+class Parent(ABC):
     def __init__(self, name):
         self.name = name
 

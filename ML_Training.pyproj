@@ -23,11 +23,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="child1_class.py" />
-    <Compile Include="child2_class.py" />
     <Compile Include="Configuration\configuration_mgr.py" />
+    <Compile Include="Inheritance\child1.py" />
+    <Compile Include="Inheritance\child2.py" />
+    <Compile Include="Inheritance\parent.py" />
     <Compile Include="Logging\logging_mgr.py" />
-    <Compile Include="parent_class.py" />
     <Compile Include="test_harness.py" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />
+    <Folder Include="Inheritance\" />
     <Folder Include="Logging\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

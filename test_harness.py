@@ -1,5 +1,13 @@
-import child1_class as child1
-import child2_class as child2
+################################################################################
+#                                                                              #
+# Author:      Todd Turczynski                                                 #
+# Create Date: Oct 24, 2019                                                    #
+#                                                                              #
+# Description:                                                                 #
+#   This app is used to test various Python capabilities along with a way to   #
+#   learn new Machine Learning topics using a simple test harness.             #
+#                                                                              #
+################################################################################
 
 import os
 import sys
@@ -80,32 +88,36 @@ class LoggingTestCase(unittest.TestCase):
         self.assertTrue(file_size == 0)
 
 class InheritanceTestCase(unittest.TestCase):
-    def setUp(self):
-        self.feature_name = ''
-
-    def tearDown(self):
-        self.feature_name = ''
+    CHILD1_NAME = 'Nick'
+    CHILD2_NAME = 'Alex'
 
     def test_inheritance(self):
-        self.feature_name = 'child1'
-        feature = child1.child1_class(self.feature_name)
-        salutation = feature.get_salutation()
+        from Inheritance.child1 import Child1
+        from Inheritance.child2 import Child2
+
+        child_name = self.CHILD1_NAME
+        my_child = Child1(child_name)
+        salutation = my_child.get_salutation()
         self.assertTrue(salutation.find('Greetings') >= 0)
 
-        self.feature_name = 'child2'
-        feature = child2.child2_class(self.feature_name)
-        salutation = feature.get_salutation()
+        child_name = self.CHILD2_NAME
+        my_child = Child2(child_name)
+        salutation = my_child.get_salutation()
         self.assertTrue(salutation.find('Hello') >= 0)
 
     def test_child1(self):
-        self.feature_name = 'child1'
-        feature = child1.child1_class(self.feature_name)
-        self.assertTrue(self.feature_name, feature.get_info())
+        from Inheritance.child1 import Child1
+
+        child_name = self.CHILD1_NAME
+        my_child = Child1(child_name)
+        self.assertTrue(child_name, my_child.get_info())
 
     def test_child2(self):
-        self.feature_name = 'child2'
-        feature = child2.child2_class(self.feature_name)
-        self.assertTrue(self.feature_name, feature.get_info())
+        from Inheritance.child2 import Child2
+
+        child_name = self.CHILD2_NAME
+        my_child = Child2(child_name)
+        self.assertTrue(child_name, my_child.get_info())
 
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__': #unittest.main()
@@ -122,8 +134,8 @@ if __name__ == '__main__': #unittest.main()
     testsToRun.addTest(LoggingTestCase('test_invalid_write'))
 
     # FeatureTestCase unit tests
-    #testsToRun.addTest(InheritanceTestCase('test_inheritance'))
-    #testsToRun.addTest(InheritanceTestCase('test_child1'))
-    #testsToRun.addTest(InheritanceTestCase('test_child2'))
+    testsToRun.addTest(InheritanceTestCase('test_inheritance'))
+    testsToRun.addTest(InheritanceTestCase('test_child1'))
+    testsToRun.addTest(InheritanceTestCase('test_child2'))
 
     unittest.TextTestRunner().run(testsToRun)
