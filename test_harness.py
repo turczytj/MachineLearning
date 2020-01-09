@@ -119,6 +119,41 @@ class InheritanceTestCase(unittest.TestCase):
         my_child = Child2(child_name)
         self.assertTrue(child_name, my_child.get_info())
 
+class KerasToTFTestCase(unittest.TestCase):
+    def test_check_version(self):
+        from KerasToTensorFlow.keras_to_tf import get_tf_version
+
+        tf_version = get_tf_version()
+        self.assertNotEqual(tf_version, None)
+
+    def test_create_mlp_for_binary_classification(self):
+        from KerasToTensorFlow.keras_to_tf import create_mlp_for_binary_classification
+
+        model_accuracy = create_mlp_for_binary_classification()
+        self.assertTrue(model_accuracy > 0.90)
+
+    def test_create_mlp_for_multiclass_classification(self):
+        from KerasToTensorFlow.keras_to_tf import create_mlp_for_multiclass_classification
+
+        model_accuracy = create_mlp_for_multiclass_classification()
+        self.assertTrue(model_accuracy > 0.90)
+
+    def test_create_mlp_for_regression_predictions(self):
+        from KerasToTensorFlow.keras_to_tf import create_mlp_for_regression_predictions
+        from KerasToTensorFlow.keras_to_tf import make_mlp_regression_prediction
+
+        model = create_mlp_for_regression_predictions()
+        self.assertNotEqual(model, None)
+
+        # The prediction should be about $150,000. Let's assume within 10% is good
+        data = [0.00632,18.00,2.310,0,0.5380,6.5750,65.20,4.0900,1,296.0,15.30,396.90,4.98]
+        prediction = make_mlp_regression_prediction(model, data)
+
+        # unit is in $1000s
+        self.assertTrue(prediction > 135.000)
+        self.assertTrue(prediction < 165.000)
+
+
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__': #unittest.main()
     testsToRun = unittest.TestSuite()
@@ -126,16 +161,22 @@ if __name__ == '__main__': #unittest.main()
     # The following are used to run specific tests at a time instead of the whole suite of unit tests
 
     # ConfigurationTestCase unit tests
-    testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
+    #testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
 
     # LoggingTestCase unit tests
-    testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
-    testsToRun.addTest(LoggingTestCase('test_valid_write'))
-    testsToRun.addTest(LoggingTestCase('test_invalid_write'))
+    #testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
+    #testsToRun.addTest(LoggingTestCase('test_valid_write'))
+    #testsToRun.addTest(LoggingTestCase('test_invalid_write'))
 
     # FeatureTestCase unit tests
-    testsToRun.addTest(InheritanceTestCase('test_inheritance'))
-    testsToRun.addTest(InheritanceTestCase('test_child1'))
-    testsToRun.addTest(InheritanceTestCase('test_child2'))
+    #testsToRun.addTest(InheritanceTestCase('test_inheritance'))
+    #testsToRun.addTest(InheritanceTestCase('test_child1'))
+    #testsToRun.addTest(InheritanceTestCase('test_child2'))
 
+    # KerasToTFTestCase unit tests
+    #testsToRun.addTest(KerasToTFTestCase('test_check_version'))
+    #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
+    #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
+    testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
+    
     unittest.TextTestRunner().run(testsToRun)

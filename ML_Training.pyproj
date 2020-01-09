@@ -27,6 +27,9 @@
     <Compile Include="Inheritance\child1.py" />
     <Compile Include="Inheritance\child2.py" />
     <Compile Include="Inheritance\parent.py" />
+    <Compile Include="KerasToTensorFlow\keras_to_tf.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Logging\logging_mgr.py" />
     <Compile Include="test_harness.py" />
   </ItemGroup>
@@ -40,6 +43,7 @@
     <Folder Include="Configuration\" />
     <Folder Include="Inheritance\" />
     <Folder Include="Logging\" />
+    <Folder Include="KerasToTensorFlow\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
