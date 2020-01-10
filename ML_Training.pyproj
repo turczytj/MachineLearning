@@ -31,6 +31,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logging\logging_mgr.py" />
+    <Compile Include="NLP\nlp.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_harness.py" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +47,7 @@
     <Folder Include="Inheritance\" />
     <Folder Include="Logging\" />
     <Folder Include="KerasToTensorFlow\" />
+    <Folder Include="NLP\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

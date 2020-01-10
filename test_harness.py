@@ -11,6 +11,7 @@
 
 import os
 import sys
+import pandas as pd
 import unittest
 
 class ConfigurationTestCase(unittest.TestCase):
@@ -159,6 +160,67 @@ class KerasToTFTestCase(unittest.TestCase):
         model_accuracy = create_cnn_for_image_classification()
         self.assertTrue(model_accuracy > 0.90)
 
+class NLPTestCase(unittest.TestCase):
+    def test_download_samples(self):
+        from NLP.nlp import download_sample_data
+
+        download_sample_data()
+
+    def test_tokenize(self):
+        from NLP.nlp import tokenize
+
+        sentence = 'My name is George and I love NLP'
+        words = tokenize(sentence)
+
+        self.assertNotEqual(words, None)
+
+        # Should be: ['My', 'name', 'is', 'George', 'and', 'I', 'love', 'NLP']
+        self.assertEqual(len(words), 8)
+
+    def test_remove_stop_words(self):
+        from NLP.nlp import remove_stop_words
+
+        sentence = "This is a sentence for removing stop words"
+        words = remove_stop_words(sentence)
+
+        self.assertNotEqual(words, None)
+
+        # Should be: ['This', 'sentence', 'removing', 'stop', 'words']
+        self.assertEqual(len(words), 5)
+
+    def test_run_stemming_process(self):
+        from NLP.nlp import run_stemming_process
+
+        sentence = "cook cooks cooking cooked"
+        words = run_stemming_process(sentence)
+
+        self.assertNotEqual(words, None)
+
+        # Should be: ['cook', 'cook', 'cook', 'cook']
+        self.assertTrue(words[0] == 'cook')
+        self.assertTrue(words[1] == 'cook')
+        self.assertTrue(words[2] == 'cook')
+        self.assertTrue(words[3] == 'cook')
+
+    def test_run_word_embedding_process(self):
+        from NLP.nlp import run_word_embedding_process
+
+        status = run_word_embedding_process()
+        self.assertTrue(status)
+
+    def test_calculate_term_frequency(self):
+        from NLP.nlp import calculate_term_frequency
+
+        line_1 = "TF-IDF uses statistics to measure how important a word is to a particular document"
+        line_2 = "The TF-IDF is perfectly balanced, considering both local and global levels of statistics for the target word."
+        line_3 = "Words that occur more frequently in a document are weighted higher, but only if they're more rare within the whole document."
+        text = [line_1, line_2, line_3]
+
+        results = calculate_term_frequency(text)
+
+        self.assertTrue(len(results) > 0)
+
+
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__': #unittest.main()
     testsToRun = unittest.TestSuite()
@@ -183,6 +245,14 @@ if __name__ == '__main__': #unittest.main()
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
-    testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
+    #testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
+    
+    # NLPTestCase unit tests
+    #testsToRun.addTest(NLPTestCase('test_download_samples'))
+    #testsToRun.addTest(NLPTestCase('test_tokenize'))
+    #testsToRun.addTest(NLPTestCase('test_remove_stop_words'))
+    #testsToRun.addTest(NLPTestCase('test_run_stemming_process'))
+    #testsToRun.addTest(NLPTestCase('test_run_word_embedding_process'))
+    testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
     
     unittest.TextTestRunner().run(testsToRun)
