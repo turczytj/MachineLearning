@@ -153,6 +153,11 @@ class KerasToTFTestCase(unittest.TestCase):
         self.assertTrue(prediction > 135.000)
         self.assertTrue(prediction < 165.000)
 
+    def test_create_cnn_for_image_classification(self):
+        from KerasToTensorFlow.keras_to_tf import create_cnn_for_image_classification
+
+        model_accuracy = create_cnn_for_image_classification()
+        self.assertTrue(model_accuracy > 0.90)
 
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__': #unittest.main()
@@ -177,6 +182,7 @@ if __name__ == '__main__': #unittest.main()
     #testsToRun.addTest(KerasToTFTestCase('test_check_version'))
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
-    testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
+    #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
+    testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
     
     unittest.TextTestRunner().run(testsToRun)

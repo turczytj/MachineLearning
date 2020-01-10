@@ -175,3 +175,74 @@ def make_mlp_regression_prediction(model, data):
     print('Predicted: %.3f' % yhat)
 
     return yhat
+
+# Convolutional Neural Networks, or CNNs for short, are a type of network designed for image input.
+# They are comprised of models with convolutional layers that extract features (called feature maps)
+# and pooling layers that distill features down to the most salient elements.
+#
+# CNNs are most well-suited to image classification tasks, although they can be used on a wide array
+# of tasks that take images as input.
+#
+# A popular image classification task is the MNIST handwritten digit classification. It involves tens
+# of thousands of handwritten digits that must be classified as a number between 0 and 9.
+#
+# The tf.keras API provides a convenience function to download and load this dataset directly.
+def create_cnn_for_image_classification():
+    from numpy import unique
+    from numpy import argmax
+    from tensorflow.keras.datasets.mnist import load_data
+    from tensorflow.keras import Sequential
+    from tensorflow.keras.layers import Dense
+    from tensorflow.keras.layers import Conv2D
+    from tensorflow.keras.layers import MaxPooling2D
+    from tensorflow.keras.layers import Flatten
+    from tensorflow.keras.layers import Dropout
+
+    # load dataset
+    (x_train, y_train), (x_test, y_test) = load_data()
+
+    # Note that the images are arrays of grayscale pixel data; therefore, we must add a channel dimension
+    # to the data before we can use the images as input to the model. The reason is that CNN models expect
+    # images in a channels-last format, that is each example to the network has the dimensions
+    # [rows, columns, channels], where channels represent the color channels of the image data.
+
+    # reshape data to have a single channel
+    x_train = x_train.reshape((x_train.shape[0], x_train.shape[1], x_train.shape[2], 1))
+    x_test = x_test.reshape((x_test.shape[0], x_test.shape[1], x_test.shape[2], 1))
+
+    # determine the shape of the input images
+    in_shape = x_train.shape[1:]
+
+    # determine the number of classes
+    n_classes = len(unique(y_train))
+    print(in_shape, n_classes)
+
+    # It is a good idea to scale the pixel values from the default range of 0-255 to 0-1 when training a CNN
+    x_train = x_train.astype('float32') / 255.0
+    x_test = x_test.astype('float32') / 255.0
+
+    # define model
+    model = Sequential()
+    model.add(Conv2D(32, (3,3), activation='relu', kernel_initializer='he_uniform', input_shape=in_shape))
+    model.add(MaxPooling2D((2, 2)))
+    model.add(Flatten())
+    model.add(Dense(100, activation='relu', kernel_initializer='he_uniform'))
+    model.add(Dropout(0.5))
+    model.add(Dense(n_classes, activation='softmax'))
+
+    # define loss and optimizer
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    # fit the model
+    model.fit(x_train, y_train, epochs=10, batch_size=128, verbose=0)
+
+    # evaluate the model
+    loss, model_accuracy = model.evaluate(x_test, y_test, verbose=0)
+    print('Accuracy: %.3f' % model_accuracy)
+
+    # make a prediction
+    image = x_train[0]
+    yhat = model.predict([[image]])
+    print('Predicted: class=%d' % argmax(yhat))
+
+    return model_accuracy
