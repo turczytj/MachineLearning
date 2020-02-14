@@ -27,6 +27,9 @@
     <Compile Include="Inheritance\child1.py" />
     <Compile Include="Inheritance\child2.py" />
     <Compile Include="Inheritance\parent.py" />
+    <Compile Include="KerasToTensorFlow\keras_regression.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="KerasToTensorFlow\keras_to_tf.py">
       <SubType>Code</SubType>
     </Compile>

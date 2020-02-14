@@ -160,6 +160,12 @@ class KerasToTFTestCase(unittest.TestCase):
         model_accuracy = create_cnn_for_image_classification()
         self.assertTrue(model_accuracy > 0.90)
 
+class KerasRegressionTestCase(unittest.TestCase):
+    def test_regression(self):
+        from KerasToTensorFlow.keras_regression import calculate_mpg
+
+        calculate_mpg()
+
 class NLPTestCase(unittest.TestCase):
     def test_download_samples(self):
         from NLP.nlp import download_sample_data
@@ -246,6 +252,9 @@ if __name__ == '__main__': #unittest.main()
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
     #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
     #testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
+
+    # KerasRegressionTestCase unit tests
+    testsToRun.addTest(KerasRegressionTestCase('test_regression'))
     
     # NLPTestCase unit tests
     #testsToRun.addTest(NLPTestCase('test_download_samples'))
