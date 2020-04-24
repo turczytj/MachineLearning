@@ -226,6 +226,16 @@ class NLPTestCase(unittest.TestCase):
 
         self.assertTrue(len(results) > 0)
 
+class DataFrameTestCase(unittest.TestCase):
+    def test_run(self):
+        from DataFrame.DataFramePlayground import DataFramePlayground
+
+        # Update Pathe env variable to access DataFramePlayground files
+        sys.path.append('.\\DataFrame')
+
+        playground = DataFramePlayground()
+        playground.run()
+
 
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__': #unittest.main()
@@ -254,7 +264,7 @@ if __name__ == '__main__': #unittest.main()
     #testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
 
     # KerasRegressionTestCase unit tests
-    testsToRun.addTest(KerasRegressionTestCase('test_regression'))
+    #testsToRun.addTest(KerasRegressionTestCase('test_regression'))
     
     # NLPTestCase unit tests
     #testsToRun.addTest(NLPTestCase('test_download_samples'))
@@ -262,6 +272,9 @@ if __name__ == '__main__': #unittest.main()
     #testsToRun.addTest(NLPTestCase('test_remove_stop_words'))
     #testsToRun.addTest(NLPTestCase('test_run_stemming_process'))
     #testsToRun.addTest(NLPTestCase('test_run_word_embedding_process'))
-    testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
+    #testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
+
+    # DataFrameTestCase unit tests
+    testsToRun.addTest(DataFrameTestCase('test_run'))
     
     unittest.TextTestRunner().run(testsToRun)

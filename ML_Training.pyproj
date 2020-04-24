@@ -24,6 +24,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration\configuration_mgr.py" />
+    <Compile Include="DataFrame\DataFramePlayground.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Inheritance\child1.py" />
     <Compile Include="Inheritance\child2.py" />
     <Compile Include="Inheritance\parent.py" />
@@ -50,6 +53,7 @@
     <Folder Include="Inheritance\" />
     <Folder Include="Logging\" />
     <Folder Include="KerasToTensorFlow\" />
+    <Folder Include="DataFrame\" />
     <Folder Include="NLP\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
