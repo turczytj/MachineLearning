@@ -254,6 +254,16 @@ class SMOTETestCase(unittest.TestCase):
         run_main()
 
 
+class PyCaretTestCase(unittest.TestCase):
+    def test_run(self):
+        from PyCaret.playground import run_demo
+
+        # Update Path env variable to access PyCaret files
+        sys.path.append('.\\PyCaret')
+
+        run_demo()
+
+
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__':  # unittest.main()
     testsToRun = unittest.TestSuite()
@@ -295,6 +305,9 @@ if __name__ == '__main__':  # unittest.main()
     # testsToRun.addTest(DataFrameTestCase('test_run'))
 
     # SMOTETestCase unit tests
-    testsToRun.addTest(SMOTETestCase('test_run'))
+    # testsToRun.addTest(SMOTETestCase('test_run'))
+
+    # PyCaretTestCase unit tests
+    testsToRun.addTest(PyCaretTestCase('test_run'))
 
     unittest.TextTestRunner().run(testsToRun)
