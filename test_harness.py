@@ -14,13 +14,14 @@ import sys
 import pandas as pd
 import unittest
 
+
 class ConfigurationTestCase(unittest.TestCase):
     def setUp(self):
         from importlib import import_module
 
         self.config_module_name = 'Configuration.configuration_mgr'
         config_module = import_module(self.config_module_name)
-        self.config_mgr  = config_module.ConfigurationMgr()
+        self.config_mgr = config_module.ConfigurationMgr()
 
         self.logging_module_name = 'Logging.logging_mgr'
         logging_module = import_module(self.logging_module_name)
@@ -45,13 +46,14 @@ class ConfigurationTestCase(unittest.TestCase):
         self.assertNotEqual(self.config_mgr.get_output_directory(), None)
         self.assertNotEqual(self.config_mgr.get_logging_level(), None)
 
+
 class LoggingTestCase(unittest.TestCase):
     def setUp(self):
         from importlib import import_module
 
         self.config_module_name = 'Configuration.configuration_mgr'
         config_module = import_module(self.config_module_name)
-        self.config_mgr  = config_module.ConfigurationMgr()
+        self.config_mgr = config_module.ConfigurationMgr()
 
         self.logging_module_name = 'Logging.logging_mgr'
         logging_module = import_module(self.logging_module_name)
@@ -88,6 +90,7 @@ class LoggingTestCase(unittest.TestCase):
         file_size = os.path.getsize(self.config_mgr.get_log_file_path())
         self.assertTrue(file_size == 0)
 
+
 class InheritanceTestCase(unittest.TestCase):
     CHILD1_NAME = 'Nick'
     CHILD2_NAME = 'Alex'
@@ -120,6 +123,7 @@ class InheritanceTestCase(unittest.TestCase):
         my_child = Child2(child_name)
         self.assertTrue(child_name, my_child.get_info())
 
+
 class KerasToTFTestCase(unittest.TestCase):
     def test_check_version(self):
         from KerasToTensorFlow.keras_to_tf import get_tf_version
@@ -147,7 +151,7 @@ class KerasToTFTestCase(unittest.TestCase):
         self.assertNotEqual(model, None)
 
         # The prediction should be about $150,000. Let's assume within 10% is good
-        data = [0.00632,18.00,2.310,0,0.5380,6.5750,65.20,4.0900,1,296.0,15.30,396.90,4.98]
+        data = [0.00632, 18.00, 2.310, 0, 0.5380, 6.5750, 65.20, 4.0900, 1, 296.0, 15.30, 396.90, 4.98]
         prediction = make_mlp_regression_prediction(model, data)
 
         # unit is in $1000s
@@ -160,11 +164,13 @@ class KerasToTFTestCase(unittest.TestCase):
         model_accuracy = create_cnn_for_image_classification()
         self.assertTrue(model_accuracy > 0.90)
 
+
 class KerasRegressionTestCase(unittest.TestCase):
     def test_regression(self):
         from KerasToTensorFlow.keras_regression import calculate_mpg
 
         calculate_mpg()
+
 
 class NLPTestCase(unittest.TestCase):
     def test_download_samples(self):
@@ -226,55 +232,69 @@ class NLPTestCase(unittest.TestCase):
 
         self.assertTrue(len(results) > 0)
 
+
 class DataFrameTestCase(unittest.TestCase):
     def test_run(self):
         from DataFrame.DataFramePlayground import DataFramePlayground
 
-        # Update Pathe env variable to access DataFramePlayground files
+        # Update Path env variable to access DataFramePlayground files
         sys.path.append('.\\DataFrame')
 
         playground = DataFramePlayground()
         playground.run()
 
 
+class SMOTETestCase(unittest.TestCase):
+    def test_run(self):
+        from SMOTE.smote import run_main
+
+        # Update Path env variable to access SMOTE files
+        sys.path.append('.\\SMOTE')
+
+        run_main()
+
+
 # If running from the Python command line then execute unittest.main()
-if __name__ == '__main__': #unittest.main()
+if __name__ == '__main__':  # unittest.main()
     testsToRun = unittest.TestSuite()
 
     # The following are used to run specific tests at a time instead of the whole suite of unit tests
 
     # ConfigurationTestCase unit tests
-    #testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
+    # testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
 
     # LoggingTestCase unit tests
-    #testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
-    #testsToRun.addTest(LoggingTestCase('test_valid_write'))
-    #testsToRun.addTest(LoggingTestCase('test_invalid_write'))
+    # testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
+    # testsToRun.addTest(LoggingTestCase('test_valid_write'))
+    # testsToRun.addTest(LoggingTestCase('test_invalid_write'))
 
     # FeatureTestCase unit tests
-    #testsToRun.addTest(InheritanceTestCase('test_inheritance'))
-    #testsToRun.addTest(InheritanceTestCase('test_child1'))
-    #testsToRun.addTest(InheritanceTestCase('test_child2'))
+    # testsToRun.addTest(InheritanceTestCase('test_inheritance'))
+    # testsToRun.addTest(InheritanceTestCase('test_child1'))
+    # testsToRun.addTest(InheritanceTestCase('test_child2'))
 
     # KerasToTFTestCase unit tests
-    #testsToRun.addTest(KerasToTFTestCase('test_check_version'))
-    #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
-    #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
-    #testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
-    #testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
+    # testsToRun.addTest(KerasToTFTestCase('test_check_version'))
+    # testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
+    # testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
+    # testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
+    # testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
 
     # KerasRegressionTestCase unit tests
-    #testsToRun.addTest(KerasRegressionTestCase('test_regression'))
-    
+    # testsToRun.addTest(KerasRegressionTestCase('test_regression'))
+
     # NLPTestCase unit tests
-    #testsToRun.addTest(NLPTestCase('test_download_samples'))
-    #testsToRun.addTest(NLPTestCase('test_tokenize'))
-    #testsToRun.addTest(NLPTestCase('test_remove_stop_words'))
-    #testsToRun.addTest(NLPTestCase('test_run_stemming_process'))
-    #testsToRun.addTest(NLPTestCase('test_run_word_embedding_process'))
-    #testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
+    # testsToRun.addTest(NLPTestCase('test_download_samples'))
+    # testsToRun.addTest(NLPTestCase('test_tokenize'))
+    # testsToRun.addTest(NLPTestCase('test_remove_stop_words'))
+    # testsToRun.addTest(NLPTestCase('test_run_stemming_process'))
+    # testsToRun.addTest(NLPTestCase('test_run_word_embedding_process'))
+    # testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
 
     # DataFrameTestCase unit tests
-    testsToRun.addTest(DataFrameTestCase('test_run'))
-    
+    # testsToRun.addTest(DataFrameTestCase('test_run'))
+
+    # SMOTETestCase unit tests
+    testsToRun.addTest(SMOTETestCase('test_run'))
+
     unittest.TextTestRunner().run(testsToRun)
