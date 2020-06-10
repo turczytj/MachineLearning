@@ -264,6 +264,16 @@ class PyCaretTestCase(unittest.TestCase):
         run_demo()
 
 
+class ScikitLearnTipsTestCase(unittest.TestCase):
+    def test_run(self):
+        from Scikit_Learn_Tips.playground import run_demo
+
+        # Update Path env variable to access PyCaret files
+        sys.path.append('.\\Scikit_Learn_Tips')
+
+        run_demo()
+
+
 # If running from the Python command line then execute unittest.main()
 if __name__ == '__main__':  # unittest.main()
     testsToRun = unittest.TestSuite()
@@ -308,6 +318,9 @@ if __name__ == '__main__':  # unittest.main()
     # testsToRun.addTest(SMOTETestCase('test_run'))
 
     # PyCaretTestCase unit tests
-    testsToRun.addTest(PyCaretTestCase('test_run'))
+    #testsToRun.addTest(PyCaretTestCase('test_run'))
+
+    # PyCaretTestCase unit tests
+    testsToRun.addTest(ScikitLearnTipsTestCase('test_run'))
 
     unittest.TextTestRunner().run(testsToRun)
