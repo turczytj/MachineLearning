@@ -23,9 +23,9 @@ def run_demo():
 
     # Make Transformer
     preprocessing = make_column_transformer(
-                        (OneHotEncoder(), ['Pclass', 'Sex']),
-                        (SimpleImputer(), ['Age']),
-                        remainder='passthrough')
+        (OneHotEncoder(), ['Pclass', 'Sex']),
+        (SimpleImputer(), ['Age']),
+        remainder='passthrough')
 
     # Fit-Transform data with transformer
     data = preprocessing.fit_transform(data)
@@ -118,4 +118,3 @@ def run_demo():
 
     print(grid.best_score_)
     print(grid.best)
-

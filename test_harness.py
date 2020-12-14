@@ -11,7 +11,6 @@
 
 import os
 import sys
-import pandas as pd
 import unittest
 
 
@@ -281,46 +280,46 @@ if __name__ == '__main__':  # unittest.main()
     # The following are used to run specific tests at a time instead of the whole suite of unit tests
 
     # ConfigurationTestCase unit tests
-    # testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
+    testsToRun.addTest(ConfigurationTestCase('test_required_config_entries_are_present'))
 
     # LoggingTestCase unit tests
-    # testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
-    # testsToRun.addTest(LoggingTestCase('test_valid_write'))
-    # testsToRun.addTest(LoggingTestCase('test_invalid_write'))
+    testsToRun.addTest(LoggingTestCase('test_log_file_exists'))
+    testsToRun.addTest(LoggingTestCase('test_valid_write'))
+    testsToRun.addTest(LoggingTestCase('test_invalid_write'))
 
     # FeatureTestCase unit tests
-    # testsToRun.addTest(InheritanceTestCase('test_inheritance'))
-    # testsToRun.addTest(InheritanceTestCase('test_child1'))
-    # testsToRun.addTest(InheritanceTestCase('test_child2'))
+    testsToRun.addTest(InheritanceTestCase('test_inheritance'))
+    testsToRun.addTest(InheritanceTestCase('test_child1'))
+    testsToRun.addTest(InheritanceTestCase('test_child2'))
 
     # KerasToTFTestCase unit tests
-    # testsToRun.addTest(KerasToTFTestCase('test_check_version'))
-    # testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
-    # testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
-    # testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
-    # testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
+    testsToRun.addTest(KerasToTFTestCase('test_check_version'))
+    testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_binary_classification'))
+    testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_multiclass_classification'))
+    testsToRun.addTest(KerasToTFTestCase('test_create_mlp_for_regression_predictions'))
+    testsToRun.addTest(KerasToTFTestCase('test_create_cnn_for_image_classification'))
 
     # KerasRegressionTestCase unit tests
-    # testsToRun.addTest(KerasRegressionTestCase('test_regression'))
+    testsToRun.addTest(KerasRegressionTestCase('test_regression'))
 
     # NLPTestCase unit tests
-    # testsToRun.addTest(NLPTestCase('test_download_samples'))
-    # testsToRun.addTest(NLPTestCase('test_tokenize'))
-    # testsToRun.addTest(NLPTestCase('test_remove_stop_words'))
-    # testsToRun.addTest(NLPTestCase('test_run_stemming_process'))
-    # testsToRun.addTest(NLPTestCase('test_run_word_embedding_process'))
-    # testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
+    testsToRun.addTest(NLPTestCase('test_download_samples'))
+    testsToRun.addTest(NLPTestCase('test_tokenize'))
+    testsToRun.addTest(NLPTestCase('test_remove_stop_words'))
+    testsToRun.addTest(NLPTestCase('test_run_stemming_process'))
+    testsToRun.addTest(NLPTestCase('test_run_word_embedding_process'))
+    testsToRun.addTest(NLPTestCase('test_calculate_term_frequency'))
 
     # DataFrameTestCase unit tests
-    # testsToRun.addTest(DataFrameTestCase('test_run'))
+    testsToRun.addTest(DataFrameTestCase('test_run'))
 
     # SMOTETestCase unit tests
-    # testsToRun.addTest(SMOTETestCase('test_run'))
+    testsToRun.addTest(SMOTETestCase('test_run'))
 
     # PyCaretTestCase unit tests
-    #testsToRun.addTest(PyCaretTestCase('test_run'))
+    testsToRun.addTest(PyCaretTestCase('test_run'))
 
-    # PyCaretTestCase unit tests
+    # ScikitLearnTipsTestCase unit tests
     testsToRun.addTest(ScikitLearnTipsTestCase('test_run'))
 
     unittest.TextTestRunner().run(testsToRun)
